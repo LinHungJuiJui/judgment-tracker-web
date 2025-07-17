@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>家福裁判書追蹤</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+    h1 { color: #2c3e50; }
+    .card { margin-bottom: 1em; padding: 1em; border: 1px solid #ccc; border-radius: 6px; }
+    .date { color: #888; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>📄 家福裁判書追蹤結果</h1>
+  <div id="last-updated" class="date"></div>
+  <div id="results"></div>
+
+  <script>
+    fetch("../data/results.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("last-updated").innerText = "最後更新時間：" + new Date(data.last_updated).toLocaleString();
+        const container = document.getElementById("results");
+        if (data.results.length === 0) {
+          container.innerHTML = "<p>目前尚未找到包含「家福」的裁判書。</p>";
+        } else {
+          data.results.forEach((item, i) => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `<b>${i+1}. ${item.法院}｜${item.案號}｜${item.裁判日期}</b><br>
+              <span>${item.事由}</span><br>
+              <i>${item.摘要}</i><br>
+              <a href="${item.連結}" target="_blank">查看裁判書</a>`;
+            container.appendChild(div);
+          });
+        }
+      });
+  </script>
+</body>
+</html>
