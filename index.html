@@ -16,7 +16,7 @@
   <div id="results"></div>
 
   <script>
-    fetch("../data/results.json")
+    fetch("results.json")
       .then(res => res.json())
       .then(data => {
         document.getElementById("last-updated").innerText = "最後更新時間：" + new Date(data.last_updated).toLocaleString();

@@ -53,7 +53,7 @@ def run_crawler():
 
     driver.quit()
 
-    with open("data/results.json", "w", encoding="utf-8") as f:
+    with open("results.json", "w", encoding="utf-8") as f:
         json.dump({
             "keyword": keyword,
             "last_updated": datetime.now().isoformat(),
