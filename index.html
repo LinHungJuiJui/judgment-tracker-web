@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>裁判字號查詢結果</title>
-  <style>
-    body { font-family: "Noto Sans TC", sans-serif; margin: 20px; }
-    h1 { color: #2b5d94; }
-    .card {
-      border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;
-      border-left: 5px solid #2b5d94; background-color: #f9f9f9;
-    }
-  </style>
+  <title>裁判書搜尋結果</title>
 </head>
 <body>
   <h1>📑 近五日內搜尋結果</h1>
   {% if results %}
     {% for item in results %}
-    <div class="card">
-      <strong>{{ item.裁判日期 }} ｜ {{ item.法院 }}</strong><br>
-      <em>{{ item.案號 }}</em> - {{ item.案由 }}<br>
-      <div style="margin-top:5px; color: #444;">{{ item.原始內容 }}</div>
-    </div>
+      <p>
+        <strong>{{ item["裁判日期"] }}｜{{ item["法院"] }}</strong><br>
+        {{ item["案號"] }} - {{ item["事由"] }}<br>
+        {{ item["摘要"] }}<br>
+        🔗 <a href="{{ item["連結"] }}" target="_blank">查看原文</a>
+      </p>
+      <hr>
     {% endfor %}
   {% else %}
     <p>❌ 無資料。</p>
